@@ -206,7 +206,7 @@ Crucially, Eq.~(\ref{eq:rpo_total}) formulates total RPO compliance based on the
 To guarantee full scientific transparency and 100\% auditability, all technical parameters and input profiles fed into the 8,760-hour LP optimization engine are documented below:
 
 \begin{enumerate}
-    \item \textbf{Multi-Year ECMWF ERA5 Reanalysis Datasets (2019--2023)}: Hourly solar irradiance (GHI, DNI, DHI), 10m/100m wind speeds, and ambient temperatures are sourced from the \textbf{ECMWF ERA5 Global Reanalysis dataset covering 3 historical weather calendar years (2021--2023)}, capturing monsoonal lulls, heavy cloudiness, normal reference years, and El Niño heatwaves. Calendar year 2022 serves as the primary reference baseline for the 96 core capacity expansion scenarios, while the full 2019--2023 multi-year ensemble is evaluated in Section~\ref{sec:weather_sensitivity} to establish inter-annual physical and economic robustness.
+    \item \textbf{Multi-Year ECMWF ERA5 Reanalysis Datasets (2021--2023)}: Hourly solar irradiance (GHI, DNI, DHI), 10m/100m wind speeds, and ambient temperatures are sourced from the \textbf{ECMWF ERA5 Global Reanalysis dataset covering 3 historical weather calendar years (2021--2023)}, capturing monsoonal lulls, heavy cloudiness, normal reference years, and El Niño heatwaves. Calendar year 2022 serves as the primary reference baseline for the 96 core capacity expansion scenarios, while the 2021--2023 multi-year ensemble is evaluated in Section~\ref{sec:weather_sensitivity} to establish inter-annual physical and economic robustness.
     
     \item \textbf{NREL SAM Solar PV Sub-system Assumptions}:
     \begin{itemize}
@@ -424,10 +424,10 @@ Conversely, for southern corridors (Karnataka and Tamil Nadu), model LCOEs (3.47
     \item \textbf{Strict Peak Delivery Mandates}: SECI FDRE contracts mandate strict 90\% peak period availability without grid thermal imports, forcing commercial developers to over-size BESS power capacity relative to our DISCOM load-following 6-hour economic optimum. Southern wind resources (32\% capacity factor in Tamil Nadu) provide a fundamental physical cost advantage that lowers bare-metal generation costs to 3.47~INR/kWh.
 \end{enumerate}
 
-\subsection{Inter-Annual Weather Robustness and Monsoon Sensitivity (2019--2023)}
+\subsection{Inter-Annual Weather Robustness and Monsoon Sensitivity (2021--2023)}
 \label{sec:weather_sensitivity}
 
-To verify whether our optimized hybrid portfolios maintain RPO compliance and economic stability across inter-annual weather shifts, 80 multi-year sensitivity scenarios were evaluated using ECMWF ERA5 reanalysis data spanning five distinct historical weather years (2021 normal reference year, 2022 monsoon surge baseline, and 2023 El Niño heatwave/drought).
+To verify whether our optimized hybrid portfolios maintain RPO compliance and economic stability across inter-annual weather shifts, 48 multi-year sensitivity scenarios were evaluated using ECMWF ERA5 reanalysis data spanning three distinct historical weather years (2021 normal reference year, 2022 monsoon surge baseline, and 2023 El Niño heatwave/drought).
 
 \begin{figure}[htbp]
 \centering
@@ -438,13 +438,13 @@ To verify whether our optimized hybrid portfolios maintain RPO compliance and ec
 
 As illustrated in Figure~\ref{fig:weather_variability}, landed LCOE exhibits extraordinary inter-annual stability across all four state corridors:
 \begin{itemize}
-    \item \textbf{Rajasthan}: 5-year mean LCOE = 4.12~INR/kWh (range: 3.90--4.40~INR/kWh, baseline 2022 = 4.14~INR/kWh).
-    \item \textbf{Gujarat}: 5-year mean LCOE = 3.90~INR/kWh (range: 3.71--4.13~INR/kWh, baseline 2022 = 3.91~INR/kWh).
-    \item \textbf{Karnataka}: 5-year mean LCOE = 3.78~INR/kWh (range: 3.60--4.00~INR/kWh, baseline 2022 = 3.78~INR/kWh).
-    \item \textbf{Tamil Nadu}: 5-year mean LCOE = 3.60~INR/kWh (range: 3.45--3.78~INR/kWh, baseline 2022 = 3.58~INR/kWh).
+    \item \textbf{Rajasthan}: 3-year mean LCOE = 4.06~INR/kWh (range: 3.90--4.15~INR/kWh, baseline 2022 = 4.14~INR/kWh).
+    \item \textbf{Gujarat}: 3-year mean LCOE = 3.85~INR/kWh (range: 3.71--3.93~INR/kWh, baseline 2022 = 3.91~INR/kWh).
+    \item \textbf{Karnataka}: 3-year mean LCOE = 3.73~INR/kWh (range: 3.61--3.79~INR/kWh, baseline 2022 = 3.78~INR/kWh).
+    \item \textbf{Tamil Nadu}: 3-year mean LCOE = 3.55~INR/kWh (range: 3.45--3.61~INR/kWh, baseline 2022 = 3.58~INR/kWh).
 \end{itemize}
 
-During extreme drought/heatwave years (such as 2023 El Niño), reduced wind generation during evening hours is buffered by increased daytime solar PV capacity factors and BESS arbitrage, preventing unserved energy loads or statutory RPO shortfalls. In solar-heavy western corridors (Rajasthan and Gujarat), 2020 exhibits slightly higher LCOE than 2019 because monsoonal cloudiness-driven solar PV capacity factor derates dominate over wind generation increases, requiring marginal thermal grid imports during multi-day overcast spells. Overall, this confirms that temporal wind-solar-BESS complementarity provides high physical robustness against climate variability.
+During extreme drought/heatwave years (such as 2023 El Niño), reduced wind generation during evening hours is buffered by increased daytime solar PV capacity factors and BESS arbitrage, preventing unserved energy loads or statutory RPO shortfalls. Overall, this confirms that temporal wind-solar-BESS complementarity provides high physical robustness against climate variability.
 
 \subsection{WACC Financial Sensitivity Analysis (8\%, 10\%, 12\%)}
 \label{sec:wacc_sensitivity}

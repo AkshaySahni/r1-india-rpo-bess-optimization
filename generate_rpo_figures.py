@@ -229,25 +229,26 @@ def generate_all_figures():
             df_w4h["Duration_Calc"] = df_w4h["BESS_Energy_GWh"] / np.maximum(1e-3, df_w4h["BESS_Power_GW"])
             df_wsub = df_w4h[np.isclose(df_w4h["Duration_Calc"], 4.0, atol=0.2)].copy()
             
-            years = [2019, 2020, 2021, 2022, 2023]
+            years = [2021, 2022, 2023]
+            df_wsub = df_wsub[df_wsub["Weather_Year"].isin(years)].copy()
             for st in states:
                 st_data = df_wsub[df_wsub["State"] == st].sort_values("Weather_Year")
                 if not st_data.empty:
                     ax.plot(st_data["Weather_Year"], st_data["Landed_LCOE_INR_kWh"], 
-                            marker="s", linewidth=2.2, color=colors[st], label=f"{state_names[st]} (Mean = ₹{st_data['Landed_LCOE_INR_kWh'].mean():.2f}/kWh)")
+                            marker="s", linewidth=2.2, color=colors[st], label=f"{state_names[st]} (3-Yr Mean = ₹{st_data['Landed_LCOE_INR_kWh'].mean():.2f}/kWh)")
                             
-            ax.set_title("Inter-Annual Landed LCOE Robustness Across 5 Historical ERA5 Weather Reanalysis Years (FY 2029-30, 4h BESS)")
+            ax.set_title("Inter-Annual Landed LCOE Robustness Across 3 Historical ERA5 Weather Reanalysis Years (FY 2029-30, 4h BESS)")
             ax.set_xlabel("ECMWF ERA5 Weather Calendar Year")
             ax.set_ylabel("Landed Levelized Cost of Electricity (INR/kWh)")
             ax.set_xticks(years)
-            ax.set_xticklabels(["2019\n(Weak Monsoon)", "2020\n(Heavy Monsoon)", "2021\n(Normal Ref)", "2022\n(Monsoon Surge)", "2023\n(El Nino Drought)"])
+            ax.set_xticklabels(["2021\n(Normal Ref)", "2022\n(Monsoon Surge)", "2023\n(El Niño Drought)"])
             ax.grid(True, linestyle="--", alpha=0.4)
             ax.legend(frameon=True, facecolor="white", framealpha=0.9, fontsize=9.5)
             plt.tight_layout()
             fig.savefig(os.path.join(FIG_DIR, "fig7_interannual_weather_variability.pdf"))
             fig.savefig(os.path.join(FIG_DIR, "fig7_interannual_weather_variability.png"))
             plt.close(fig)
-            print("Saved Figure 7: Multi-Year Weather Inter-Annual Variability")
+            print("Saved Figure 7: Multi-Year Weather Inter-Annual Variability (3 Years: 2021-2023)")
 
 if __name__ == "__main__":
     generate_all_figures()
