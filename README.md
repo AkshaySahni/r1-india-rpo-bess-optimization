@@ -10,7 +10,7 @@ This repository provides the complete, auditable code and data reproducibility p
 
 ## 📌 Repository Scope & Exclusions
 
-> **Note on Repository Contents**: This repository is dedicated exclusively to **code, raw input preprocessing, optimization solvers, diagnostic logs, and scenario datasets**. Manuscript LaTeX source code (`.tex`) and pre-compiled PDF files (`.pdf`) are deliberately excluded from this repository and are hosted separately in the publisher repository.
+> **Note on Repository Contents**: This repository is dedicated exclusively to **code, raw input preprocessing, optimization solvers, diagnostic logs, and scenario datasets**. 
 
 ---
 
