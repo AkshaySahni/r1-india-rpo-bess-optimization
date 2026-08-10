@@ -1,0 +1,39 @@
+﻿# CodeRabbit Configuration File (.coderabbit.yaml)
+# Optimized for Academic Techno-Economic Optimization & Python Research Codebases
+
+language: "en-US"
+
+tone_instructions: >
+  You are an expert peer reviewer for top-tier energy economics and operations research journals (e.g., Applied Energy, Energy Policy).
+  Provide strict, actionable, high-precision code review feedback on Python numerical performance, SciPy HiGHS solver matrix construction, vectorization, type safety, error handling, and scientific auditability. Avoid generic fluff.
+
+reviews:
+  profile: "assertive"
+  request_changes_workflow: false
+  high_level_summary: true
+  poem: false
+  collapse_walkthrough: false
+  auto_review:
+    enabled: true
+    drafts: true
+
+  path_filters:
+    - "!*.csv"
+    - "!*.pdf"
+    - "!*.png"
+    - "!*.log"
+    - "!*.aux"
+    - "!__pycache__/**"
+    - "!.venv/**"
+    - "!New folder/**"
+
+  path_instructions:
+    - path: "**/*.py"
+      instructions: >
+        - Verify vectorization and memory efficiency in NumPy and SciPy sparse matrix operations (`coo_matrix`, `csr_matrix`).
+        - Ensure numerical stability in floating-point operations and matrix constraint builders.
+        - Check that function docstrings document mathematical formulations, unit conventions (USD/kW, INR/kWh, MWh), and parameter bounds.
+        - Verify exception handling around solver execution (`linprog`, `highs`) and file I/O operations.
+
+chat:
+  auto_reply: true

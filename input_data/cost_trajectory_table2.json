@@ -1,0 +1,74 @@
+{
+    "units": {
+        "CAPEX": "USD/kW (1 USD = 83.5 INR)",
+        "Fixed_O_and_M": "INR/MW-year",
+        "WACC": "10.0%",
+        "Lifetime": "25 years",
+        "CRF": 0.11017
+    },
+    "trajectory": {
+        "2024-25": {
+            "Solar_USD_kW": 480,
+            "Wind_USD_kW": 880,
+            "BESS_Pwr_USD_kW": 180,
+            "BESS_Eng_USD_kWh": 125
+        },
+        "2025-26": {
+            "Solar_USD_kW": 450,
+            "Wind_USD_kW": 850,
+            "BESS_Pwr_USD_kW": 165,
+            "BESS_Eng_USD_kWh": 112
+        },
+        "2026-27": {
+            "Solar_USD_kW": 420,
+            "Wind_USD_kW": 820,
+            "BESS_Pwr_USD_kW": 150,
+            "BESS_Eng_USD_kWh": 102
+        },
+        "2027-28": {
+            "Solar_USD_kW": 390,
+            "Wind_USD_kW": 790,
+            "BESS_Pwr_USD_kW": 135,
+            "BESS_Eng_USD_kWh": 90
+        },
+        "2028-29": {
+            "Solar_USD_kW": 370,
+            "Wind_USD_kW": 770,
+            "BESS_Pwr_USD_kW": 125,
+            "BESS_Eng_USD_kWh": 82
+        },
+        "2029-30": {
+            "Solar_USD_kW": 350,
+            "Wind_USD_kW": 750,
+            "BESS_Pwr_USD_kW": 115,
+            "BESS_Eng_USD_kWh": 75
+        }
+    },
+    "fixed_om": {
+        "Solar_INR_MW_yr": 500000.0,
+        "Wind_INR_MW_yr": 1200000.0,
+        "BESS_Pwr_INR_MW_yr": 300000.0
+    },
+    "state_coordinates": {
+        "Rajasthan": {
+            "lat": 27.0,
+            "lon": 71.0,
+            "zone": "Bhadla Solar Park"
+        },
+        "Gujarat": {
+            "lat": 23.5,
+            "lon": 71.5,
+            "zone": "Khavda Renewable Park"
+        },
+        "Tamil Nadu": {
+            "lat": 9.2,
+            "lon": 78.4,
+            "zone": "Kamuthi/Muppandal Zone"
+        },
+        "Karnataka": {
+            "lat": 14.2,
+            "lon": 77.4,
+            "zone": "Pavagada Solar Park"
+        }
+    }
+}
