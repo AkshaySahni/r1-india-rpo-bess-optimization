@@ -12,7 +12,7 @@ An 8,760-hour annual Linear Programming (LP) capacity expansion and operational 
 ## 📌 Technical Highlights & Data Provenance
 
 1. **Empirical Data & Calibrated Physical Profile Pipeline**:
-   - **Solar PV & Wind Profiles**: Formulated via analytical solar-position (elevation/declination geometry, single-axis tracking) and 3.3 MW IEC IIA wind-shear power-law boundary layer physical models, calibrated to empirical Central Electricity Authority (CEA) and Ministry of New and Renewable Energy (MNRE) state-level capacity factor benchmarks (Rajasthan 24.5% Solar / 28.5% Wind; Gujarat 23.8% Solar / 33.5% Wind; Tamil Nadu 22.2% Solar / 36.2% Wind; Karnataka 22.8% Solar / 31.5% Wind).
+   - **Solar PV & Wind Profiles**: Formulated via analytical solar-position (elevation/declination geometry, single-axis tracking) and 3.3 MW IEC IIA wind-shear power-law boundary layer physical models, scaled to representative state annual capacity factor baselines (Rajasthan 24.5% Solar / 28.5% Wind; Gujarat 23.8% Solar / 33.5% Wind; Tamil Nadu 22.2% Solar / 36.2% Wind; Karnataka 22.8% Solar / 31.5% Wind).
    - **DISCOM Demand Telemetry**: Ingested via a 2-step hybrid disaggregation of Zenodo daily state totals ([DOI: 10.5281/zenodo.14983362](https://doi.org/10.5281/zenodo.14983362)) and Mendeley Data regional utility hourly shapes ([DOI: 10.17632/y58jknpgs8.2](https://doi.org/10.17632/y58jknpgs8.2)), normalized to a 1,000 MW peak reference system.
 
 2. **High-Speed Linear Programming Engine**:

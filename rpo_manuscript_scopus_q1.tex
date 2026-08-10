@@ -31,9 +31,9 @@ India's statutory Renewable Purchase Obligation (RPO) trajectory mandates electr
 \label{sec:intro}
 %==============================================================================
 
-As part of its updated Nationally Determined Contributions (NDCs) under the Paris Agreement, India has pledged to achieve 500~GW of non-fossil electric capacity and reduce the emissions intensity of its economy by 45\% relative to 2005 levels by 2030 \cite{MNRE2023}. The primary regulatory driver enforcing clean energy adoption across state utilities is the Renewable Purchase Obligation (RPO), a statutory quota mechanism requiring electricity distribution companies (DISCOMs), captive power plants, and open-access industrial consumers to procure a defined fraction of their total electricity from renewable sources \cite{Prateek2019, Singh2024}.
+As part of its updated Nationally Determined Contributions (NDCs) under the Paris Agreement, India has pledged to achieve 500~GW of non-fossil electric capacity and reduce the emissions intensity of its economy by 45\% relative to 2005 levels by 2030 \cite{Singh2024}. The primary regulatory driver enforcing clean energy adoption across state utilities is the Renewable Purchase Obligation (RPO), a statutory quota mechanism requiring electricity distribution companies (DISCOMs), captive power plants, and open-access industrial consumers to procure a defined fraction of their total electricity from renewable sources \cite{Prateek2019, Singh2024}.
 
-In October 2023, the Ministry of Power (MoP), Government of India, issued a revised statutory RPO trajectory spanning Financial Year (FY) 2024--25 through FY 2029--30 \cite{MNRE2023}. Under this mandate, the total RPO target increases rapidly from 29.91\% to 43.33\% of annual electricity consumption. Crucially, the regulation enforces distinct statutory sub-obligations for Wind RPO (rising from 0.67\% to 3.48\%, restricted to wind projects commissioned after March 31, 2024), Hydro RPO (0.39\% to 1.33\%), Distributed Renewable Energy (1.50\% to 4.50\%), and ``Other RE'' (comprising predominantly solar PV, rising from 27.35\% to 34.02\%) \cite{Takyar2024}.
+In October 2023, the Ministry of Power (MoP), Government of India, issued a revised statutory RPO trajectory spanning Financial Year (FY) 2024--25 through FY 2029--30 \cite{CEA2023, Singh2024}. Under this mandate, the total RPO target increases rapidly from 29.91\% to 43.33\% of annual electricity consumption. Crucially, the regulation enforces distinct statutory sub-obligations for Wind RPO (rising from 0.67\% to 3.48\%, restricted to wind projects commissioned after March 31, 2024), Hydro RPO (0.39\% to 1.33\%), Distributed Renewable Energy (1.50\% to 4.50\%), and ``Other RE'' (comprising predominantly solar PV, rising from 27.35\% to 34.02\%) \cite{Takyar2024}.
 
 Significantly, the legal enforcement of RPOs was fundamentally altered by bringing non-compliance under Section 14A of the Energy Conservation (Amendment) Act 2022 \cite{Singh2024, Outlook2024}. Defaulting utilities are now subject to central financial penalties up to 100,000~INR per day of continued non-compliance, alongside a statutory non-compliance penalty of 10,000~INR/MWh (10.00~INR/kWh) for unfulfilled Renewable Energy Certificates (RECs). Because this statutory penalty (10.00~INR/kWh) substantially exceeds the landed LCOE of hybrid renewable-plus-storage generation (3.47--4.14~INR/kWh), RPO compliance has transitioned from a lax administrative guideline into an enforceable financial imperative for DISCOM resource planners.
 
@@ -58,12 +58,12 @@ This paper addresses these gaps by formulating an 8,760-hour annual Linear Progr
 \subsection{Ministry of Power RPO Trajectory}
 \label{sec:trajectory}
 
-Table~\ref{tab:rpo_targets} outlines the year-by-year statutory RPO sub-targets notified by the Ministry of Power for FY 2024--25 through FY 2029--30 \cite{MNRE2023, Singh2024}.
+Table~\ref{tab:rpo_targets} outlines the year-by-year statutory RPO sub-targets notified by the Ministry of Power and Central Electricity Authority (CEA) for FY 2024--25 through FY 2029--30 \cite{CEA2023, Singh2024}.
 
 \begin{table}[htbp]
 \centering
 \small
-\caption{Statutory Renewable Purchase Obligation (RPO) trajectory in India (FY 2024--25 to FY 2029--30) \cite{MNRE2023, Singh2024}.}
+\caption{Statutory Renewable Purchase Obligation (RPO) trajectory in India (FY 2024--25 to FY 2029--30) \cite{CEA2023, Singh2024}.}
 \label{tab:rpo_targets}
 \begin{tabular}{lrrrrr}
 \toprule
@@ -213,14 +213,14 @@ To guarantee full scientific transparency and mathematical auditability, all tec
     \sin \alpha_t &= \sin \phi \sin \delta_t + \cos \phi \cos \delta_t \cos h_t \label{eq:solar_elev} \\
     \gamma_{\text{pv},t} &= \text{clip}\left( \max(0, \sin \alpha_t \cdot 1.18 \cdot 0.935) \times \frac{\text{CF}_{\text{solar,target}}}{\overline{\gamma}_{\text{raw}}}, 0, 1 \right) \label{eq:solar_prof}
     \end{align}
-    Profiles are calibrated to empirical CEA and MNRE state-level solar capacity factor benchmarks~\cite{CEA2023,MNRE2023}: Rajasthan (24.5\%), Gujarat (23.8\%), Karnataka (22.8\%), and Tamil Nadu (22.2\%).
+    Profiles are scaled to representative state annual capacity factor baselines reflecting single-axis tracking solar PV performance across major Indian renewable corridors: Rajasthan (24.5\%), Gujarat (23.8\%), Karnataka (22.8\%), and Tamil Nadu (22.2\%).
 
     \item \textbf{Analytical Onshore Wind Boundary Layer Sub-system Model}: Onshore wind hourly capacity factor profiles ($\gamma_{\text{wind},t}$) model 3.3~MW IEC Class IIA turbines (120~m hub height), capturing diurnal evening surges (peaking around 18:00 hrs) and summer monsoon seasonal peaks (June--September, days 150--270):
     \begin{align}
     \text{diurnal}_t &= 0.85 + 0.30 \sin\left(\frac{2\pi(\text{hour}_t - 18)}{24}\right), \quad \text{monsoon}_t = \begin{cases} 1.65 & t \in [\text{June 1, Sept 30}] \\ 0.75 & \text{otherwise} \end{cases} \label{eq:wind_factors} \\
     \gamma_{\text{wind},t} &= \text{clip}\left( (\text{diurnal}_t \cdot \text{monsoon}_t)^3 \cdot 0.915 \times \frac{\text{CF}_{\text{wind,target}}}{\overline{\gamma}_{\text{raw}}}, 0, 1 \right) \label{eq:wind_prof}
     \end{align}
-    Profiles are calibrated to empirical CEA and MNRE state-level onshore wind capacity factor benchmarks~\cite{CEA2023,MNRE2023}: Tamil Nadu (36.2\%), Gujarat (33.5\%), Karnataka (31.5\%), and Rajasthan (28.5\%).
+    Profiles are scaled to representative state annual capacity factor baselines reflecting 120~m hub-height onshore wind potential across state corridors: Tamil Nadu (36.2\%), Gujarat (33.5\%), Karnataka (31.5\%), and Rajasthan (28.5\%).
 
     \item \textbf{Empirical DISCOM Load Telemetry \& Disaggregation Methodology}: State DISCOM load demand curves ($D_t$) are synthesized via a two-step hybrid disaggregation methodology: (i)~annual state daily demand totals are ingested from the Zenodo DISCOM telemetry dataset (\textsf{DOI: 10.5281/zenodo.14983362}), and (ii)~hourly diurnal load shapes are derived from Mendeley Data regional utility telemetry (\textsf{DOI: 10.17632/y58jknpgs8.2}), normalized to a 1,000~MW peak demand reference system ($D_t = \frac{\text{Load}_t}{\max(\text{Load}_t)} \times 1000$).
 
@@ -813,10 +813,7 @@ CEA (Central Electricity Authority), 2023.
 Report on Optimal Generation Capacity Mix for 2029--30.
 Ministry of Power, Government of India, New Delhi.
 
-\bibitem{MNRE2023}
-MNRE (Ministry of New and Renewable Energy), 2023.
-Physical Progress and State-wise Renewable Energy Performance Reports (2020--2023).
-Government of India, New Delhi.
+
 
 \end{thebibliography}
 

@@ -22,7 +22,7 @@ def load_8760_profiles(state="RJ", year=2022):
     """
     Loads 8,760-hour profiles for Solar PV (gamma_pv,t), Onshore Wind (gamma_wind,t),
     and DISCOM Demand (D_t) derived from analytical solar-position and wind-shear physical models
-    calibrated to empirical CEA/MNRE state-level annual capacity factors,
+    scaled to representative state annual capacity factor baselines,
     Zenodo daily state totals (DOI 10.5281/zenodo.14983362), and Mendeley regional load shapes (DOI 10.17632/y58jknpgs8.2).
     """
     # Profile file paths

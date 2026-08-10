@@ -17,7 +17,7 @@ import math
 import numpy as np
 import pandas as pd
 
-# Empirical State Capacity Factor Benchmarks (CEA & MNRE State Progress Reports)
+# Representative State Annual Capacity Factor Baselines
 STATE_CF_BENCHMARKS = {
     "RJ": {"solar_cf": 0.245, "wind_cf": 0.285, "lat": 27.0},
     "GJ": {"solar_cf": 0.238, "wind_cf": 0.335, "lat": 23.5},
@@ -57,7 +57,7 @@ def generate_analytical_solar_profile(state="RJ", year=2022):
     # Inter-annual weather variability scaling (2021 normal, 2022 surge, 2023 El Nino)
     year_mult = {2021: 0.99, 2022: 1.00, 2023: 1.02}.get(year, 1.00)
     
-    # Scale to empirical CEA state capacity factor
+    # Scale to representative state capacity factor baseline
     mean_raw = np.mean(solar_raw)
     scaled_solar = solar_raw * ((target_cf * year_mult) / (mean_raw if mean_raw > 0 else 1.0))
     return np.clip(scaled_solar, 0.0, 1.0)
