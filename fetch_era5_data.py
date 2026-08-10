@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """
 Input Data Fetching & Preprocessing Pipeline for India RPO 8760 Optimization.
 Data Sources & Provenance:
@@ -91,3 +91,4 @@ c.retrieve(
 if __name__ == "__main__":
     export_table2_json()
     fetch_era5_cds_script_template()
+
