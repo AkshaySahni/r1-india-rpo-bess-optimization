@@ -44,7 +44,7 @@ def load_8760_profiles(state="RJ", year=2022):
     day_of_year = t // 24
     hour_of_day = t % 24
     
-    # Solar profile (PySAM Mono-PERC single-axis tracking model)
+    # Solar profile (Analytical solar elevation geometry model)
     delta = 23.45 * np.sin(2 * np.pi * (284 + day_of_year) / 365.0)
     h_angle = 15.0 * (hour_of_day - 12.0)
     lat_map = {"RJ": 27.0, "GJ": 23.5, "TN": 9.2, "KA": 14.2}

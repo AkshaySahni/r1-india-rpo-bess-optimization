@@ -66,7 +66,7 @@ def run_parallel_scenarios():
     df_sens.to_csv("rpo_bess_degradation_sensitivity.csv", index=False)
     print(f"Saved BESS degradation sensitivity results to: rpo_bess_degradation_sensitivity.csv")
 
-    # 3. Multi-Year Weather Sensitivity (2021-2023 ERA5 & Mendeley Reanalysis, FY 2029-30, 4 States, 4 Durations)
+    # 3. Multi-Year Weather Sensitivity (2021-2023 Analytical & Mendeley Load Telemetry, FY 2029-30, 4 States, 4 Durations)
     weather_years = [2021, 2022, 2023]
     weather_args = [(v, st, dur, yr) for v in sens_vintages for st in states for dur in durations for yr in weather_years]
     print(f"Launching Parallel Pool for {len(weather_args)} multi-year weather reanalysis scenarios...")

@@ -213,14 +213,14 @@ To guarantee full scientific transparency and mathematical auditability, all tec
     \sin \alpha_t &= \sin \phi \sin \delta_t + \cos \phi \cos \delta_t \cos h_t \label{eq:solar_elev} \\
     \gamma_{\text{pv},t} &= \text{clip}\left( \max(0, \sin \alpha_t \cdot 1.18 \cdot 0.935) \times \frac{\text{CF}_{\text{solar,target}}}{\overline{\gamma}_{\text{raw}}}, 0, 1 \right) \label{eq:solar_prof}
     \end{align}
-    Profiles are calibrated to empirical CEA and MNRE state-level solar capacity factor benchmarks: Rajasthan (24.5\%), Gujarat (23.8\%), Karnataka (22.8\%), and Tamil Nadu (22.2\%).
+    Profiles are calibrated to empirical CEA and MNRE state-level solar capacity factor benchmarks~\cite{CEA2023,MNRE2023}: Rajasthan (24.5\%), Gujarat (23.8\%), Karnataka (22.8\%), and Tamil Nadu (22.2\%).
 
     \item \textbf{Analytical Onshore Wind Boundary Layer Sub-system Model}: Onshore wind hourly capacity factor profiles ($\gamma_{\text{wind},t}$) model 3.3~MW IEC Class IIA turbines (120~m hub height), capturing diurnal evening surges (peaking around 18:00 hrs) and summer monsoon seasonal peaks (June--September, days 150--270):
     \begin{align}
     \text{diurnal}_t &= 0.85 + 0.30 \sin\left(\frac{2\pi(\text{hour}_t - 18)}{24}\right), \quad \text{monsoon}_t = \begin{cases} 1.65 & t \in [\text{June 1, Sept 30}] \\ 0.75 & \text{otherwise} \end{cases} \label{eq:wind_factors} \\
     \gamma_{\text{wind},t} &= \text{clip}\left( (\text{diurnal}_t \cdot \text{monsoon}_t)^3 \cdot 0.915 \times \frac{\text{CF}_{\text{wind,target}}}{\overline{\gamma}_{\text{raw}}}, 0, 1 \right) \label{eq:wind_prof}
     \end{align}
-    Profiles are calibrated to empirical CEA and MNRE state-level onshore wind capacity factor benchmarks: Tamil Nadu (36.2\%), Gujarat (33.5\%), Karnataka (31.5\%), and Rajasthan (28.5\%).
+    Profiles are calibrated to empirical CEA and MNRE state-level onshore wind capacity factor benchmarks~\cite{CEA2023,MNRE2023}: Tamil Nadu (36.2\%), Gujarat (33.5\%), Karnataka (31.5\%), and Rajasthan (28.5\%).
 
     \item \textbf{Empirical DISCOM Load Telemetry \& Disaggregation Methodology}: State DISCOM load demand curves ($D_t$) are synthesized via a two-step hybrid disaggregation methodology: (i)~annual state daily demand totals are ingested from the Zenodo DISCOM telemetry dataset (\textsf{DOI: 10.5281/zenodo.14983362}), and (ii)~hourly diurnal load shapes are derived from Mendeley Data regional utility telemetry (\textsf{DOI: 10.17632/y58jknpgs8.2}), normalized to a 1,000~MW peak demand reference system ($D_t = \frac{\text{Load}_t}{\max(\text{Load}_t)} \times 1000$).
 
@@ -428,12 +428,12 @@ Conversely, for southern corridors (Karnataka and Tamil Nadu), model LCOEs (3.47
 \subsection{Inter-Annual Weather Robustness and Monsoon Sensitivity (2021--2023)}
 \label{sec:weather_sensitivity}
 
-To verify whether our optimized hybrid portfolios maintain RPO compliance and economic stability across inter-annual weather shifts, 48 multi-year sensitivity scenarios were evaluated using ECMWF ERA5 reanalysis data spanning three distinct historical weather years (2021 normal reference year, 2022 monsoon surge baseline, and 2023 El Niño heatwave/drought).
+To verify whether our optimized hybrid portfolios maintain RPO compliance and economic stability across inter-annual weather shifts, 48 multi-year sensitivity scenarios were evaluated using historical weather profiles spanning three distinct calendar years (2021 normal reference year, 2022 monsoon surge baseline, and 2023 El Niño heatwave/drought).
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.92\textwidth]{figures/fig7_interannual_weather_variability.pdf}
-\caption{Landed LCOE inter-annual robustness across 3 historical ECMWF ERA5 weather reanalysis years (2021--2023) for FY 2029--30 4-hour BESS portfolios across four Indian renewable corridors.}
+\caption{Landed LCOE inter-annual robustness across 3 historical weather calendar years (2021--2023) for FY 2029--30 4-hour BESS portfolios across four Indian renewable corridors.}
 \label{fig:weather_variability}
 \end{figure}
 
@@ -537,7 +537,7 @@ While this paper presents a rigorous 8,760-hour LP optimization framework with f
 \begin{enumerate}
     \item \textbf{Single-Node DISCOM Spatial Abstraction}: The model treats each state DISCOM as a single copper-plate electrical node, omitting intra-state nodal transmission congestion, zonal losses, and sub-station transformer constraints. Future work should integrate multi-node AC optimal power flow (OPF) networks.
     \item \textbf{Dynamic Rainflow Battery Degradation}: BESS degradation is modeled via static cycle-life horizons ($Y_{\text{repl}}$) and constant throughput wear penalties ($C_{\text{deg}}$). Coupling the LP dispatch with dynamic Rainflow cycle-counting algorithms and electro-thermal cell degradation models will further refine long-term stack replacement predictions.
-    \item \textbf{Climate Shift Projections}: Profile inputs rely on historical ERA5 reanalysis (2019--2023). Integrating CMIP6 climate projection models to capture long-term monsoonal shifts and extreme weather frequency will enhance multi-decadal asset risk assessment.
+    \item \textbf{Climate Shift Projections}: Profile inputs rely on historical multi-year weather profiles (2021--2023). Integrating CMIP6 climate projection models to capture long-term monsoonal shifts and extreme weather frequency will enhance multi-decadal asset risk assessment.
 \end{enumerate}
 
 %==============================================================================
@@ -592,9 +592,7 @@ Renewable Energy Tariffs in India: Trends and Market Drivers. Institute for Ener
 IRENA, 2021.
 Renewable Power Generation Costs in 2020. International Renewable Energy Agency, Abu Dhabi.
 
-\bibitem{MNRE2023}
-Ministry of New \& Renewable Energy (MNRE), 2023.
-Year End Review 2023: Renewable Energy Progress in India. Press Information Bureau, Government of India, New Delhi.
+
 
 \bibitem{Mothkoor2024}
 Mothkoor, V., Jain, A., Ram, R., 2024.
@@ -805,6 +803,20 @@ Tejada-Arango, D.A., Domeshek, M., Wogrin, S., Centeno, E., 2019.
 Enhanced representative days and system states modeling for energy storage investment analysis.
 IEEE Trans. Power Syst. 33 (6), 6534--6544.
 
+
+
+
+
+
+\bibitem{CEA2023}
+CEA (Central Electricity Authority), 2023.
+Report on Optimal Generation Capacity Mix for 2029--30.
+Ministry of Power, Government of India, New Delhi.
+
+\bibitem{MNRE2023}
+MNRE (Ministry of New and Renewable Energy), 2023.
+Physical Progress and State-wise Renewable Energy Performance Reports (2020--2023).
+Government of India, New Delhi.
 
 \end{thebibliography}
 

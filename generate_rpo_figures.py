@@ -237,8 +237,8 @@ def generate_all_figures():
                     ax.plot(st_data["Weather_Year"], st_data["Landed_LCOE_INR_kWh"], 
                             marker="s", linewidth=2.2, color=colors[st], label=f"{state_names[st]} (3-Yr Mean = ₹{st_data['Landed_LCOE_INR_kWh'].mean():.2f}/kWh)")
                             
-            ax.set_title("Inter-Annual Landed LCOE Robustness Across 3 Historical ERA5 Weather Reanalysis Years (FY 2029-30, 4h BESS)")
-            ax.set_xlabel("ECMWF ERA5 Weather Calendar Year")
+            ax.set_title("Inter-Annual Landed LCOE Robustness Across 3 Historical Weather Calendar Years (FY 2029-30, 4h BESS)")
+            ax.set_xlabel("Weather Calendar Year")
             ax.set_ylabel("Landed Levelized Cost of Electricity (INR/kWh)")
             ax.set_xticks(years)
             ax.set_xticklabels(["2021\n(Normal Ref)", "2022\n(Monsoon Surge)", "2023\n(El Niño Drought)"])
