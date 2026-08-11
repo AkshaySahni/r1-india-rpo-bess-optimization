@@ -234,8 +234,14 @@ def generate_all_figures():
             for st in states:
                 st_data = df_wsub[df_wsub["State"] == st].sort_values("Weather_Year")
                 if not st_data.empty:
-                    ax.plot(st_data["Weather_Year"], st_data["Landed_LCOE_INR_kWh"], 
-                            marker="s", linewidth=2.2, color=colors[st], label=f"{state_names[st]} (3-Yr Mean = ₹{st_data['Landed_LCOE_INR_kWh'].mean():.2f}/kWh)")
+                    mean_val = st_data['Landed_LCOE_INR_kWh'].mean()
+                    min_val = st_data['Landed_LCOE_INR_kWh'].min()
+                    max_val = st_data['Landed_LCOE_INR_kWh'].max()
+                    y_err = [[mean_val - min_val] * len(st_data), [max_val - mean_val] * len(st_data)]
+                    ax.errorbar(st_data["Weather_Year"], st_data["Landed_LCOE_INR_kWh"], 
+                                yerr=y_err, fmt="-s", capsize=5, capthick=1.5, linewidth=2.2, 
+                                color=colors[st], label=f"{state_names[st]} (Mean = ₹{mean_val:.2f}, Range [{min_val:.2f}-{max_val:.2f}])")
+                    ax.fill_between(st_data["Weather_Year"], min_val, max_val, color=colors[st], alpha=0.10)
                             
             ax.set_title("Inter-Annual Landed LCOE Robustness Across 3 Historical Weather Calendar Years (FY 2029-30, 4h BESS)")
             ax.set_xlabel("Weather Calendar Year")
@@ -248,7 +254,48 @@ def generate_all_figures():
             fig.savefig(os.path.join(FIG_DIR, "fig7_interannual_weather_variability.pdf"))
             fig.savefig(os.path.join(FIG_DIR, "fig7_interannual_weather_variability.png"))
             plt.close(fig)
-            print("Saved Figure 7: Multi-Year Weather Inter-Annual Variability (3 Years: 2021-2023)")
+            print("Saved Figure 7: Multi-Year Weather Inter-Annual Variability with Error Bars & Range Shading")
+
+        # ------------------ FIGURE 8 [NEW]: LCOE DISTRIBUTION BOXPLOT ACROSS ALL 288 SCENARIOS ------------------
+        all_lcoes = []
+        # Aggregate across base, degradation, weather, and wacc CSVs
+        for path in ["rpo_scenario_results_8760.csv", "rpo_bess_degradation_sensitivity.csv", 
+                     "rpo_multiyear_weather_sensitivity.csv", "rpo_wacc_financial_sensitivity.csv"]:
+            if os.path.exists(path):
+                f_df = pd.read_csv(path)
+                if "Landed_LCOE_INR_kWh" in f_df.columns and "State" in f_df.columns:
+                    all_lcoes.append(f_df[["State", "Landed_LCOE_INR_kWh"]])
+        
+        if all_lcoes:
+            df_all_scenarios = pd.concat(all_lcoes, ignore_index=True)
+            fig, ax = plt.subplots(figsize=(9.5, 5.5))
+            data_to_plot = [df_all_scenarios[df_all_scenarios["State"] == st]["Landed_LCOE_INR_kWh"].dropna().values for st in states]
+            
+            bp = ax.boxplot(data_to_plot, patch_artist=True, tick_labels=[state_names[st] for st in states],
+                            medianprops=dict(color="black", linewidth=2.0),
+                            whiskerprops=dict(linewidth=1.5),
+                            capprops=dict(linewidth=1.5))
+            
+            for patch, st in zip(bp['boxes'], states):
+                patch.set_facecolor(colors[st])
+                patch.set_alpha(0.65)
+                
+            ax.set_title("Landed LCOE Distribution Across All 288 Solved Policy & Technical Scenarios")
+            ax.set_xlabel("State Renewable Corridor")
+            ax.set_ylabel("Landed Levelized Cost of Electricity (INR/kWh)")
+            ax.grid(True, linestyle="--", alpha=0.4)
+            
+            # Annotate medians
+            for i, st in enumerate(states, start=1):
+                vals = df_all_scenarios[df_all_scenarios["State"] == st]["Landed_LCOE_INR_kWh"].dropna()
+                med = vals.median()
+                ax.text(i, med + 0.08, f"Med: ₹{med:.2f}", horizontalalignment='center', fontsize=9.5, fontweight='bold')
+                
+            plt.tight_layout()
+            fig.savefig(os.path.join(FIG_DIR, "fig8_lcoe_distribution_boxplot.pdf"))
+            fig.savefig(os.path.join(FIG_DIR, "fig8_lcoe_distribution_boxplot.png"))
+            plt.close(fig)
+            print("Saved Figure 8: LCOE Distribution Boxplot across 288 Scenarios")
 
 if __name__ == "__main__":
     generate_all_figures()
